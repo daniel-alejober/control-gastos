@@ -97,6 +97,7 @@ header h1 {
   border: none;
   flex: 1;
   font-size: 1.6rem;
+  outline: none;
 }
 .formulario input[type="submit"] {
   background-color: #1048a4;
@@ -348,6 +349,7 @@ main {
 }
 .modal .cerrar-modal img {
   width: 100%;
+  cursor: pointer;
 }
 
 .modal .formulario {
