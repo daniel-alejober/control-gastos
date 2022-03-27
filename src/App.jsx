@@ -104,6 +104,7 @@ function App() {
         setPresupuestoValido={setPresupuestoValido}
         presupuestoValido={presupuestoValido}
         gastos={gastos}
+        setGastos={setGastos}
       />
       {presupuestoValido && (
         <>
