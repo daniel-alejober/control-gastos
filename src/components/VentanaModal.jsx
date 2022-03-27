@@ -8,6 +8,7 @@ const VentanaModal = ({
   setAnimarModal,
   guardarGasto,
   editarGasto,
+  setEditarGasto,
 }) => {
   const [mensaje, setMensaje] = useState("");
   const [gastoEditado, setGastoEditado] = useState(""); //state para saber si estamos editando un gasto
@@ -42,7 +43,7 @@ const VentanaModal = ({
 
   const cerrarModal = () => {
     setAnimarModal(false);
-
+    setEditarGasto({});
     setTimeout(() => {
       setVentanaModal(false);
     }, 500);

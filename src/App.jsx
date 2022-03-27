@@ -30,12 +30,14 @@ function App() {
         gastoEditado.id === gasto.id ? gasto : gastoEditado
       );
       setGastos(gastoActualizado);
+      setEditarGasto({});
     } else {
       gasto.id = generarId();
       gasto.fecha = Date.now();
       setGastos([...gastos, gasto]);
     }
   };
+  /*abrira la ventana modal si hay valores en editar gasto */
   useEffect(() => {
     if (Object.keys(editarGasto).length > 0) {
       setVentanaModal(true);
@@ -44,6 +46,11 @@ function App() {
       }, 600);
     }
   }, [editarGasto]);
+
+  const eliminarGasto = (id) => {
+    const gastoEliminado = gastos.filter((gasto) => gasto.id !== id);
+    setGastos(gastoEliminado);
+  };
 
   return (
     <div className={ventanaModal ? "fijar" : ""}>
@@ -57,7 +64,11 @@ function App() {
       {presupuestoValido && (
         <>
           <main>
-            <ListadoGastos gastos={gastos} setEditarGasto={setEditarGasto} />
+            <ListadoGastos
+              gastos={gastos}
+              setEditarGasto={setEditarGasto}
+              eliminarGasto={eliminarGasto}
+            />
           </main>
           <div className="nuevo-gasto">
             <img
@@ -75,6 +86,7 @@ function App() {
           setAnimarModal={setAnimarModal}
           guardarGasto={guardarGasto}
           editarGasto={editarGasto}
+          setEditarGasto={setEditarGasto}
         />
       )}
     </div>
