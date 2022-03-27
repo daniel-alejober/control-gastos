@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import VentanaModal from "./components/VentanaModal";
 import ListadoGastos from "./components/ListadoGastos";
+import Filtros from "./components/Filtros";
 import { generarId } from "./helpers/generarId";
 import IconoNuevoGasto from "./img/nuevo-gasto.svg";
 function App() {
@@ -21,6 +22,8 @@ function App() {
   const [ventanaModal, setVentanaModal] = useState(false);
   const [animarModal, setAnimarModal] = useState(false);
   const [editarGasto, setEditarGasto] = useState({});
+  const [filtro, setFiltro] = useState(""); //state para filtrar opciones
+  const [gastosFiltrados, setGastosFiltrados] = useState([]); //aqui guardaran los gastos filtrados
 
   /*abrira la ventana modal si hay valores en editar gasto */
   useEffect(() => {
@@ -51,6 +54,17 @@ function App() {
       setPresupuestoValido(true);
     }
   }, []);
+
+  /*Filtrar los gastos por categoria nos va a regresar todos los que sean iguales*/
+  useEffect(() => {
+    if (filtro) {
+      const gastosFiltrados = gastos.filter(
+        (gasto) => gasto.categoria === filtro
+      );
+      setGastosFiltrados(gastosFiltrados);
+    }
+  }, [filtro]);
+
   /*Esta funcion se encargar de mostrar la ventana modal */
   const handleNuevoGasto = () => {
     setVentanaModal(true);
@@ -94,10 +108,13 @@ function App() {
       {presupuestoValido && (
         <>
           <main>
+            <Filtros filtro={filtro} setFiltro={setFiltro} />
             <ListadoGastos
               gastos={gastos}
               setEditarGasto={setEditarGasto}
               eliminarGasto={eliminarGasto}
+              filtro={filtro}
+              gastosFiltrados={gastosFiltrados}
             />
           </main>
           <div className="nuevo-gasto">
