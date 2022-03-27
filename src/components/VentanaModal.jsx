@@ -94,6 +94,7 @@ const VentanaModal = ({
             type="number"
             name="cantidad"
             id="Cantidad"
+            min={1}
             placeholder="Añade la cantidad del gasto"
             value={cantidad}
             onChange={agregarGasto}
